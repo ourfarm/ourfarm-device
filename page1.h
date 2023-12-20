@@ -6,7 +6,7 @@ const char page1[] PROGMEM = R"=====(
     <style>
     .wb       { margin: 30px auto; padding: 15px; display: flex; flex-direction: column; background: white;}
     .la1      { margin: 10px auto; padding: 10px 10px; display:inline; font-size: 20px; width: 100px;text-align: right; }
-    .in1      { margin: 10px auto; padding: 10px 10px; display:inline; font-size: 20px; width: 100px;text-align: left;  }
+    .in1      { margin: 10px auto; padding: 10px 10px; display:inline; font-size: 20px; width: 190px;text-align: left;  }
     .udate_bt { font-size: 20px;   padding: 10px 25px; border-radius: 5px; background: green; color: white;}
     .reset_bt { font-size: 20px;   padding: 10px 25px; border-radius: 5px; background: red;   color: white;}
     a         { text-decoration: none; display: inline-block; padding: 8px 16px; }
@@ -23,11 +23,15 @@ const char page1[] PROGMEM = R"=====(
       <div style="align-self: center;margin-top: 25px;" id='grid''>    
       <div>
         <label for='ssid' class ='la1' >SSID:</label>
-        <input class ='in1' type='text' name='ssid' id='ssid'  value>
+        <input class ='in1' type='text' name='ssid' id='ssid' value>
       </div>
       <div>
         <label for='pass' class ='la1' >PASS:</label>
-        <input class ='in1' type='text' name='pass' id='pass'  value>
+        <input class ='in1' type='text' name='pass' id='pass' value>
+      </div>
+      <div>
+        <label for='url' class ='la1' >URL:</label>
+        <input class ='in1' type='text' name='url' id='url' value>
       </div>
       <div style="align-self: center;margin-top: 50px;" id='grid'>
       </div>
@@ -51,11 +55,13 @@ const char page1[] PROGMEM = R"=====(
          body: JSON.stringify({
            ssid:document.getElementById('ssid').value,
            pass:document.getElementById('pass').value,
+           url:document.getElementById('url').value,
             })
          })
         .then(response => response.json())
         .then(response => { document.getElementById('ssid').value = response['ssid'],
         document.getElementById('pass').value = response['pass'], 
+        document.getElementById('url').value = response['url'], 
         alert(JSON.stringify(response))})
    }),
    document.getElementById('reset').addEventListener('click', function() {
@@ -71,12 +77,16 @@ const char page1[] PROGMEM = R"=====(
   })
  
   document.addEventListener('DOMContentLoaded', async function () {
-    const ssid = document.getElementById('ssid')
-    const pass = document.getElementById('pass')
+    const ssid = document.getElementById('ssid');
+    const pass = document.getElementById('pass');
+    const url = document.getElementById('url');
+
     let response = await fetch('/getAP');
     let result =   await response.json();
+
     ssid.value = result['ssid'];
     pass.value = result['pass'];
+    url.value = result['url'];
   })
   </script>
 </html>

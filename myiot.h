@@ -5,7 +5,7 @@ typedef struct {
   char tag;
   char ssid[20];
   char pass[20];
-  char sw1;
+  char url[20];
 } myIoT;
 
 void readObj(myIoT *obj);

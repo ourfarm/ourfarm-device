@@ -18,9 +18,9 @@ const char page2[] PROGMEM = R"=====(
   </head>
   <body style='background: steelblue;'>
     <div class = 'wb'>
-       <h1 style='align-self: center;'>Switch Operation</h1>      
+       <h1 style='align-self: center;'>LED</h1>      
        <div style="align-self: center;margin-top: 25px;" id='grid'>
-         <button id='sw1' class ='sw_bt'>SW1</button>
+         <button id='sw1' class ='sw_bt'>AUTO</button>
        </div>
        <div style="align-self: center;margin-top: 25px;" id='grid'>
        <a href="/" conclick = "stopColor()" class="prev round">&#8250;</a>
