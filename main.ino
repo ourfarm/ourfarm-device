@@ -21,7 +21,7 @@ void config_init();
 #include "page4.h"
 
 const int PIN_LED   = 2;
-const int PIN_DH11  = 14;
+const int PIN_DH11  = 12;
 const int PIN_PHOTO = 33;
 
 DHT dht(PIN_DH11, DHT11);
@@ -109,15 +109,13 @@ bool getAutoStatus() {
 
   if (httpResponseCode > 0) {
     String response = http.getString();
-    Serial.println(httpResponseCode);
-    Serial.println(response);
 
     http.end();
     
-    if (response == "off") {
-      return false;
-    } else {
+    if (response == "1") {
       return true;
+    } else {
+      return false;
     }
   } else {
     Serial.print("Error on getting Auto status: ");
@@ -140,10 +138,10 @@ bool getLEDStatus() {
 
         http.end();
         
-        if (response == "off") {
-          return false;
-        } else {
+        if (response == "1") {
           return true;
+        } else {
+          return false;
         }
     } else {
         Serial.print("Error on getting LED status: ");
@@ -405,6 +403,7 @@ void loop(void) {
   // 자동 모드 체크
   if (millis() - lastAutoModeCheckTime > autoModeInterval) {
     isAutoMode = getAutoStatus();
+    Serial.println(isAutoMode);
     lastAutoModeCheckTime = millis();
   }
 
